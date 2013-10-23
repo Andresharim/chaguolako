@@ -1,6 +1,8 @@
 ChaguoLako::Application.routes.draw do
   get "welcome/index"
   get "welcome/about"
+  get "log_out" => "sessions#destroy", :as => "log_out"
+  
 
   resources :voters, :sessions
   root :to => "welcome#index"

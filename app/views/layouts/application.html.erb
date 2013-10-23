@@ -9,6 +9,11 @@
 <body>
 	<%= link_to image_tag("/assets/nds_logo.jpg"), root_path, :class => "logo" %>
 	<h1>Chaguo Lako</h1>
+	
+	<% if admin_is_logged_in? %>
+		<%= link_to "Log-out #{session[:user].username}", log_out_path %>
+	<% end %>
+	
 	<hr/>
 
     <%= yield %>
