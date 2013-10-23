@@ -40,7 +40,7 @@ class VotersController < ApplicationController
   # POST /voters
   # POST /voters.json
   def create
-    @voter = Voter.new(params[:voter])
+    @voter = Voter.new(params[:voter].permit(:email, :password, :phone, :username))
 
     respond_to do |format|
       if @voter.save
@@ -59,7 +59,7 @@ class VotersController < ApplicationController
     @voter = Voter.find(params[:id])
 
     respond_to do |format|
-      if @voter.update_attributes(params[:voter])
+      if @voter.update_attributes(params[:voter].permit(:email, :password, :phone, :username))
         format.html { redirect_to @voter, notice: 'Voter was successfully updated.' }
         format.json { head :no_content }
       else
