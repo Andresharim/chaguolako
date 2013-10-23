@@ -1,9 +1,8 @@
 ChaguoLako::Application.routes.draw do
   get "welcome/index"
-
   get "welcome/about"
 
-  resources :voters
+  resources :voters, :sessions
   root :to => "welcome#index"
 
 
