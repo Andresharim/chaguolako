@@ -4,7 +4,7 @@ class VotersController < ApplicationController
   # GET /voters
   # GET /voters.json
   def index
-    @voters = Voter.all
+    @voters = Voter.all.order("approved")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -55,13 +55,20 @@ class VotersController < ApplicationController
     end
   end
 
+  def approve
+    @voter = Voter.find(params[:id])
+    @voter.approved = true
+    @voter.save!
+    redirect_to voters_url, notice: "Voter #{@voter.username} has been approved"
+  end
+
   # PUT /voters/1
   # PUT /voters/1.json
   def update
     @voter = Voter.find(params[:id])
 
     respond_to do |format|
-      if @voter.update_attributes(params[:voter].permit(:email, :password, :phone, :username))
+      if @voter.update_attributes(params[:voter].permit(:email, :password, :phone, :username, :approved))
         format.html { redirect_to @voter, notice: 'Voter was successfully updated.' }
         format.json { head :no_content }
       else

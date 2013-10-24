@@ -1,27 +1,30 @@
 <h1>Listing voters</h1>
+<p id="notice"><%= notice %></p>
 
 <table>
   <tr>
     <th>Email</th>
     <th>Username</th>
-    <th>Password</th>
     <th>Phone</th>
     <th>Approved</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @voters.each do |voter| %>
-  <tr>
+  <tr class="<%= 'highlight' if !voter.approved %>">
     <td><%= voter.email %></td>
     <td><%= voter.username %></td>
-    <td><%= voter.password %></td>
     <td><%= voter.phone %></td>
     <td><%= voter.approved %></td>
     <td><%= link_to 'Show', voter %></td>
     <td><%= link_to 'Edit', edit_voter_path(voter) %></td>
     <td><%= link_to 'Destroy', voter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if !voter.approved %>
+        <td><%= link_to 'Approve', voter_approve_path(voter), method: :post, data: { confirm: 'Are you sure you want to approve?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

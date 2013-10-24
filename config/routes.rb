@@ -1,9 +1,13 @@
 ChaguoLako::Application.routes.draw do
+  resources :voters
+
   get "admin/index" => "admin#index", :as => "admin_home"
   get "welcome/index"
   get "welcome/about"
   get "log_out" => "sessions#destroy", :as => "log_out"
-  
+
+  # get "voters/approve" => "voters#approve", :as => "voter_approve"
+  match "/voters/:id/approve" => "voters#approve", :as => "voter_approve", via: [:get, :post]
 
   resources :voters, :sessions
   root :to => "welcome#index"
