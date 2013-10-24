@@ -59,6 +59,9 @@ class VotersController < ApplicationController
     @voter = Voter.find(params[:id])
     @voter.approved = true
     @voter.save!
+
+    VoterMailer.approval_email(@voter).deliver
+
     redirect_to voters_url, notice: "Voter #{@voter.username} has been approved"
   end
 
