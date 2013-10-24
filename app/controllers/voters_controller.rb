@@ -1,4 +1,6 @@
 class VotersController < ApplicationController
+  before_action :check_if_admin_is_logged_in, only: [:index]
+
   # GET /voters
   # GET /voters.json
   def index
