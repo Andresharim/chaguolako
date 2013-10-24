@@ -12,6 +12,7 @@
 	
 	<% if admin_is_logged_in? %>
 		<%= link_to "Log-out #{session[:user].username}", log_out_path %>
+		<%= link_to "View Voters", voters_path %>
 	<% end %>
 	
 	<hr/>
