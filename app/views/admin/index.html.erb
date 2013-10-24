@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <th>Username</th>
+    <th>Email</th>
+  </thead>
+  <tbody>
+    <% @voters.each do |voter| %>
+        <tr>
+          <td><%=  voter.username %></td>
+          <td><%=  voter.email %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
