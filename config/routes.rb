@@ -1,4 +1,6 @@
 ChaguoLako::Application.routes.draw do
+  resources :polls
+
   resources :voters
 
   get "admin/index" => "admin#index", :as => "admin_home"
