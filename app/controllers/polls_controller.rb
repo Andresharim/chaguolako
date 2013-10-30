@@ -1,5 +1,7 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_admin_is_logged_in, only: [:new, :create, :update, :destroy]
+
 
   # GET /polls
   def index
@@ -22,6 +24,7 @@ class PollsController < ApplicationController
   # POST /polls
   def create
     @poll = Poll.new(poll_params)
+    @poll.admin_id = session[:user].id
 
     if @poll.save
       redirect_to @poll, notice: 'Poll was successfully created.'

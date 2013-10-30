@@ -16,8 +16,8 @@
 </p>
 
 <p>
-  <strong>Admin:</strong>
-  <%= @poll.admin %>
+  <strong>Created by:</strong>
+  <%= @poll.admin.username %>
 </p>
 
 <%= link_to 'Edit', edit_poll_path(@poll) %> |
