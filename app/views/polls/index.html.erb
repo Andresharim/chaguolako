@@ -17,8 +17,8 @@
     <% @polls.each do |poll| %>
       <tr>
         <td><%= poll.question %></td>
-        <td><%= poll.start_date %></td>
-        <td><%= poll.deadline %></td>
+        <td><%= poll.start_date.to_s(:simple) %></td>
+        <td><%= poll.deadline.to_s(:simple) %></td>
         <td><%= poll.admin.username %></td>
         <td><%= link_to 'Show', poll %></td>
         <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
