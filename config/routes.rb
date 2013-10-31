@@ -1,5 +1,9 @@
 ChaguoLako::Application.routes.draw do
-  resources :polls
+  resources :options
+
+  resources :polls do
+    resources :options
+  end
 
   resources :voters
 
