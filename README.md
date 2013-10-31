@@ -15,7 +15,7 @@ rails g controller sessions new
 
 - We need to change our old log in method so we can support both admins and voters logging in with the same page
 
-	Add this to the login view.
+	Add this to the existing login view.
 
 	```html
 	  <p>
@@ -49,10 +49,11 @@ rails g controller sessions new
 		end
 	```
 
-	Add the ability for a vote to be authenticated
+	Add the ability for a voter to be authenticated
 
 	```ruby
 		def self.authenticate(username, password)
+			#only approved voters should be able to log in
 	    	voter = find_by_username_and_password_and_approved(username, password, true)    
 	  	end
   	```
