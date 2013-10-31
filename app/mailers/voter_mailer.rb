@@ -1,5 +1,5 @@
 class VoterMailer < ActionMailer::Base
-  default from: ""
+  default from: "admin@nds.org"
 
   def approval_email(voter)
   	@voter = voter
