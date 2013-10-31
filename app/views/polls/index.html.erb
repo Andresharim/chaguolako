@@ -21,8 +21,10 @@
         <td><%= poll.deadline.to_s(:simple) %></td>
         <td><%= poll.admin.username %></td>
         <td><%= link_to 'Show', poll %></td>
-        <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
-        <td><%= link_to 'Destroy', poll, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if admin_is_logged_in? %> 
+          <td><%= link_to 'Edit', edit_poll_path(poll) %></td>
+          <td><%= link_to 'Destroy', poll, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

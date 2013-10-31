@@ -53,6 +53,28 @@ rails g controller sessions new
 
 	```ruby
 		def self.authenticate(username, password)
-	    	voter = find_by_username_and_password(username, password)    
+	    	voter = find_by_username_and_password_and_approved(username, password, true)    
 	  	end
   	```
+
+  	Now voters can log in, but how do differentiate between the admin and a normal voter?
+
+  	Modify our existing helpers...
+
+  	```ruby
+		def admin_is_logged_in?
+			session[:user] != nil && session[:user].is_a?(Admin)
+		end
+
+		def voter_is_logged_in?
+			session[:user] != nil && session[:user].is_a?(Voter)
+		end
+
+		def user_is_logged_in?
+			# This could be either a voter or admin
+			voter_is_logged_in? || admin_is_logged_in?
+		end
+  	```
+
+  	We can now use this helpers to differentiate between when a voter is logged in, an admin is logged in or nobody is logged in.
+
