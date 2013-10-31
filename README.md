@@ -17,34 +17,42 @@ rails g controller sessions new
 
 	Add this to the login view.
 
-	<pre>
+	```html
 	  <p>
 	  	<%= label_tag :is_admin %><br />
 	  	<%= check_box_tag :is_admin %>
 	  </p>
-	</pre>
+	```
 
   	Change the authentication method in the session controller
 
- 	<pre>
-  		def create
-		    if params[:is_admin] == "1" 
-		      admin = Admin.authenticate(params[:username], params[:password])
-		      if admin
-		        session[:user] = admin
-		        redirect_to root_url, :notice => "Welcome #{admin.username}"
-		      else        
-		        redirect_to new_session_path, :notice => "Invalid username or password"
-		      end       
-		    else
-		      # its a regular voter
-		      voter = Voter.authenticate(params[:username], params[:password])
-		      if voter
-		        session[:user] = voter
-		        redirect_to root_url, :notice => "Welcome #{voter.username}"
-		      else
-		        redirect_to new_session_path, :notice => "Invalid username or password"
-		      end
-		    end     
-		  end
-	</pre>
+ 	```ruby
+		def create
+			if params[:is_admin] == "1" 
+			  admin = Admin.authenticate(params[:username], params[:password])
+			  if admin
+			    session[:user] = admin
+			    redirect_to root_url, :notice => "Welcome #{admin.username}"
+			  else        
+			    redirect_to new_session_path, :notice => "Invalid username or password"
+			  end       
+			else
+			  # its a regular voter
+			  voter = Voter.authenticate(params[:username], params[:password])
+			  if voter
+			    session[:user] = voter
+			    redirect_to root_url, :notice => "Welcome #{voter.username}"
+			  else
+			    redirect_to new_session_path, :notice => "Invalid username or password"
+			  end
+			end     
+		end
+	```
+
+	Add the ability for a vote to be authenticated
+
+	```ruby
+		def self.authenticate(username, password)
+	    	voter = find_by_username_and_password(username, password)    
+	  	end
+  	```
